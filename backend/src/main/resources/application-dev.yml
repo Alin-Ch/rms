@@ -1,0 +1,150 @@
+server:
+  port: 8000
+
+spring:
+  datasource:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/rms?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+      username: ${DATASOURCE_USERNAME:root}
+      password: ${DATASOURCE_PWD:CUIG+XiC3Emml+pTP/PLpaaBLsFGvaWy4J+37+zceULfOEymSfuDtCqVmV6EXQkD/6NIq57tvalRNEHVB0TMhA==}
+      publickey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAItw/rosKF5/ZgF9tlBmFbY+Wfniidvr6G0VHqjDaJLXdp1r6E8kk69lzS+DKNHJFoSVqKIKE5EfBB7f8dVAE/sCAwEAAQ==
+      druid:
+        # 初始连接数
+        initialSize: 5
+        # 最小连接池数量
+        minIdle: 10
+        # 最大连接池数量
+        maxActive: 100
+        # 配置获取连接等待超时的时间
+        maxWait: 60000
+        # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+        timeBetweenEvictionRunsMillis: 60000
+        # 配置一个连接在池中最小生存的时间，单位是毫秒
+        minEvictableIdleTimeMillis: 300000
+        # 配置一个连接在池中最大生存的时间，单位是毫秒
+        maxEvictableIdleTimeMillis: 900000
+        # 配置检测连接是否有效
+        validationQuery: SELECT 1 FROM DUAL
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        webStatFilter:
+          enabled: true
+        statViewServlet:
+          enabled: true
+          # 设置IP白名单，不填则允许所有访问
+          allow:
+          # 设置IP黑名单
+          #        deny:
+          url-pattern: /druid/*
+          # 控制台管理用户名和密码
+          login-username: admin
+          login-password: 123456
+        filter:
+          stat:
+            enabled: true
+            # 慢SQL记录
+            log-slow-sql: true
+            slow-sql-millis: 1000
+            merge-sql: true
+          wall:
+            config:
+              multi-statement-allow: true
+          config:
+            enabled: true
+        connection-properties: config.decrypt=true;config.decrypt.key=${spring.datasource.publickey}
+
+      # 或者
+#      druid:
+#        driver-class-name: com.mysql.cj.jdbc.Driver
+#        url: jdbc:mysql://localhost:3306/rms?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+#        username: root
+#        password: 123456
+#        min-idle: 0   # 最小空闲连接数
+#        max-active: 100  # 最大活跃线程数
+
+
+  # 加密解密
+
+
+  # Swagger配置
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+  # 解决后端时间数据格式化
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  # Redis配置
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+
+  # 关闭 thymeleaf 视图位置检查
+  freemarker:
+    check-template-location: false
+
+  # 发送邮箱验证码
+  mail:
+    host: smtp.qq.com
+    port: 587
+    protocol: smtp
+    username:
+    password:
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+            required: true
+  #  上传文件的大小
+  servlet:
+    multipart:
+      max-file-size: 150MB
+      max-request-size: 150MB
+
+# 配置阿里云oss
+aliyun:
+  oss:
+    file:
+      endpoint:
+      accessKeyID:
+      accessKeySecret:
+      bucketName:
+
+# 配置支付宝沙箱
+alipay:
+  appId:
+  appPrivateKey:
+  alipayPublicKey:
+  notifyUrl: http://zhbicu.natappfree.cc/alipay/notify
+  returnUrl: http://localhost:8081/user/order
+
+# mybatis-plus配置
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:/mapper/*Mapper.xml
+
+# gitee小山加密解密
+#custom:
+#  encrypt:
+#    method: AES         #加密方法【支持AES,RSA,SIGN_AND_AES】
+#    secret: abcdef0123456789
+
+
+# 其他配置
+wfzm:
+  jwt:
+    header: Authorization
+    expire: 604800    # 7天过期时间
+    secret: pgL621pWx6O4ubZh2s4QVE78j9amh3sP
+
+
+
+

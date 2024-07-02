@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.www.mapper.UserHouseOperationMapper">
+
+    <resultMap id="BaseResultMap" type="com.www.pojo.UserHouseOperation">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="userId" column="user_id" jdbcType="BIGINT"/>
+        <result property="itemId" column="item_id" jdbcType="BIGINT"/>
+        <result property="operationType" column="operation_type" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id
+        ,user_id,item_id,
+        operation_type,create_time,update_time
+    </sql>
+    <select id="getAllUserOperation" resultType="com.www.pojo.UserHouseOperation">
+        SELECT user_id,
+               item_id,
+               SUM(CASE operation_type
+                       WHEN 0 THEN 2
+                       WHEN 1 THEN 3
+                       WHEN 2 THEN 4
+                       WHEN 3 THEN 5
+                       ELSE 0
+                   END) AS value
+        FROM user_house_operation
+        GROUP BY user_id, item_id
+        ORDER BY user_id
+    </select>
+
+    <select id="getAllHouseOperation" resultType="com.www.pojo.UserHouseOperation">
+        SELECT item_id,
+               user_id,
+               SUM(CASE operation_type
+                       WHEN 0 THEN 2
+                       WHEN 1 THEN 3
+                       WHEN 2 THEN 4
+                       WHEN 3 THEN 5
+                       ELSE 0
+                   END) AS VALUE
+        FROM
+            user_house_operation
+        GROUP BY
+            item_id,
+            user_id
+        ORDER BY
+            item_id
+    </select>
+</mapper>

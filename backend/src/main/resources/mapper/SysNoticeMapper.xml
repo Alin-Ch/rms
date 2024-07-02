@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.www.mapper.SysNoticeMapper">
+
+
+    <sql id="Base_Column_List">
+        id
+        ,title,content,
+        status,create_time,update_time,
+        admin_id
+    </sql>
+    <select id="getNotice" resultType="com.www.pojo.SysNotice">
+        SELECT sn.*, su.username AS publisherName
+        FROM sys_notice sn
+                 INNER JOIN sys_user su ON sn.publisher_id = su.id
+        ORDER BY sn.create_time DESC LIMIT 5
+    </select>
+    <select id="getPageData" resultType="com.www.pojo.SysNotice">
+        SELECT sn.*, su.username AS publisherName
+        FROM sys_notice sn
+                 INNER JOIN sys_user su ON sn.publisher_id = su.id
+        ORDER BY sn.create_time DESC
+    </select>
+
+</mapper>

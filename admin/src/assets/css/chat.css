@@ -1,0 +1,91 @@
+.chat-content {
+    width: 100%;
+    background-color: pink;
+}
+
+.chat-content .word,
+.chat-content .word-my {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.chat-content .word img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.chat-content .word .info {
+    margin-left: 10px;
+}
+
+.chat-content .word .info .time {
+    font-size: 12px;
+    color: rgba(51, 51, 51, 0.8);
+    margin: 0;
+    height: 20px;
+    line-height: 20px;
+    margin-top: -5px;
+}
+
+.chat-content .word .info .info-content {
+    padding: 10px;
+    font-size: 14px;
+    background: #fff;
+    position: relative;
+    margin-top: 8px;
+}
+
+.chat-content .word .info .info-content::before {
+    position: absolute;
+    left: -8px;
+    top: 8px;
+    content: '';
+    border-right: 10px solid #FFF;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+}
+
+.chat-content .word-my img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.chat-content .word-my .info {
+    width: 90%;
+    margin-left: 10px;
+    text-align: right;
+}
+
+.chat-content .word-my .info .time {
+    font-size: 12px;
+    color: rgba(51, 51, 51, 0.8);
+    margin: 0;
+    height: 20px;
+    line-height: 20px;
+    margin-top: -5px;
+    margin-right: 10px;
+}
+
+.chat-content .word-my .info .info-content {
+    max-width: 70%;
+    padding: 10px;
+    font-size: 14px;
+    float: right;
+    margin-right: 10px;
+    position: relative;
+    margin-top: 8px;
+    background: #A3C3F6;
+    text-align: left;
+}
+
+.chat-content .word-my .info .info-content::after {
+    position: absolute;
+    right: -8px;
+    top: 8px;
+    content: '';
+    border-left: 10px solid #A3C3F6;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+}

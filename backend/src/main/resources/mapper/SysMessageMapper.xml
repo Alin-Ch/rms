@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.www.mapper.SysMessageMapper">
+
+    <select id="getMessageList" resultType="com.www.pojo.SysMessage">
+        SELECT sender_id, receiver_id, COUNT(*) AS message_count
+        FROM sys_message
+        WHERE sender_id = #{id}
+           OR receiver_id = #{id}
+        GROUP BY sender_id
+
+    </select>
+
+    <!--    SUM(CASE WHEN receiver_id = #{id} AND status = 0 THEN 1 ELSE 0 END) +-->
+    <!--    SUM(CASE WHEN sender_id = #{id} AND status = 0 THEN 1 ELSE 0 END) AS unread_count-->
+    <select id="getMessageGroup" resultType="java.util.Map">
+        SELECT chat_id1,
+               chat_id2,
+               message_count,
+               latest_create_time,
+               COALESCE(unread_count, 0) AS unread_count,
+               m.content AS latest_message_content
+        FROM (
+                 SELECT LEAST(receiver_id, sender_id)    AS chat_id1,
+                        GREATEST(receiver_id, sender_id) AS chat_id2,
+                        COUNT(*)                         AS message_count,
+                        MAX(create_time)                 AS latest_create_time,
+                        SUM(CASE WHEN receiver_id = #{id} AND status = 0 THEN 1 ELSE 0 END) AS unread_count
+                 FROM sys_message
+                 WHERE receiver_id = #{id} OR sender_id = #{id}
+                 GROUP BY chat_id1, chat_id2
+             ) AS subquery_alias
+                 LEFT JOIN sys_message m ON ((m.receiver_id = chat_id1 AND m.sender_id = chat_id2) OR (m.receiver_id = chat_id2 AND m.sender_id = chat_id1))
+            AND m.create_time = latest_create_time
+        ORDER BY latest_create_time DESC
+    </select>
+
+    <select id="getMessageGroup2" resultType="com.www.pojo.ChatGroup">
+        SELECT chat_id1,
+               chat_id2,
+               message_count,
+               latest_create_time,
+               (SELECT COUNT(*)
+                FROM sys_message
+                WHERE (receiver_id = chat_id1 AND sender_id = chat_id2)
+                   OR (receiver_id = chat_id2 AND sender_id = chat_id1)
+                    AND status = 0
+               ) AS unread_count
+        FROM (
+                 SELECT LEAST(receiver_id, sender_id)    AS chat_id1,
+                        GREATEST(receiver_id, sender_id) AS chat_id2,
+                        COUNT(*)                         AS message_count,
+                        MAX(create_time)                 AS latest_create_time
+                 FROM sys_message
+                 WHERE receiver_id = #{id}
+                    OR sender_id = #{id}
+                 GROUP BY chat_id1, chat_id2
+                 ORDER BY latest_create_time DESC
+             ) AS subquery_alias
+    </select>
+    <select id="getMessageGroup1" resultType="com.www.pojo.ChatGroup">
+        SELECT LEAST(receiver_id, sender_id)    AS chat_id1,
+               GREATEST(receiver_id, sender_id) AS chat_id2,
+               COUNT(*)                         AS message_count,
+               MAX(create_time)                 AS latest_create_time
+        FROM sys_message
+        WHERE receiver_id = #{id}
+           OR sender_id = #{id}
+        GROUP BY chat_id1,
+                 chat_id2
+        ORDER BY latest_create_time DESC
+    </select>
+    <select id="getMessageDetail" resultType="com.www.pojo.SysMessage">
+        SELECT *
+        FROM sys_message
+        WHERE (sender_id = #{chatId1} AND receiver_id = #{chatId2})
+           OR (sender_id = #{chatId2} AND receiver_id = #{chatId1})
+        order by create_time DESC
+    </select>
+
+</mapper>

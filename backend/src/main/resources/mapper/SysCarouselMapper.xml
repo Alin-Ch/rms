@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.www.mapper.SysCarouselMapper">
+
+    <resultMap id="BaseResultMap" type="com.www.pojo.SysCarousel">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="url" column="url" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id
+        ,url,description,
+        create_time,update_time,status
+    </sql>
+    <select id="getBannerList" resultType="com.www.pojo.SysCarousel">
+        SELECT *
+        FROM sys_carousel
+        WHERE status = 1
+        ORDER BY create_time DESC LIMIT 5
+    </select>
+
+</mapper>

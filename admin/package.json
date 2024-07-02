@@ -1,0 +1,41 @@
+{
+  "name": "front-project",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
+    "@wangeditor/editor": "^5.1.23",
+    "@wangeditor/editor-for-vue": "^5.1.12",
+    "axios": "^1.6.2",
+    "crypto-js": "^4.2.0",
+    "dompurify": "^3.1.4",
+    "echarts": "^5.4.3",
+    "element-plus": "^2.4.3",
+    "elui-china-area-dht": "^2.0.0",
+    "less": "^4.2.0",
+    "nprogress": "^0.2.0",
+    "pinia": "^2.1.7",
+    "qs": "^6.12.0",
+    "vue": "^3.3.4",
+    "vue-baidu-map-3x": "^1.0.38",
+    "vue-i18n": "^9.8.0",
+    "vue-router": "^4.0.13",
+    "vue3-baidu-map-gl": "^2.3.2",
+    "vue3-water-marker": "^0.0.5",
+    "vuex": "^4.0.2",
+    "xlsx": "^0.18.5",
+    "xss": "^1.0.15"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.2.3",
+    "unplugin-auto-import": "^0.17.2",
+    "unplugin-vue-components": "^0.26.0",
+    "vite": "^4.4.5"
+  }
+}

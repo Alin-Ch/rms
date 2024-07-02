@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.www.mapper.SysOrderMapper">
+    <select id="selectBySeller" resultType="com.www.pojo.SysOrder">
+        SELECT
+        so.*, sh.*, u_owner.*, u_user.*
+        FROM
+        sys_order so
+        INNER JOIN sys_house sh ON so.house_id = sh.id
+        LEFT JOIN sys_user u_owner ON so.owner_id = u_owner.id
+        LEFT JOIN sys_user u_user ON so.user_id = u_user.id
+        <where>
+            <if test="ownerId != null and ownerId != ''">
+                AND so.owner_id = #{ownerId}
+            </if>
+            <if test="order_no != null and order_no != ''">
+                AND order_no LIKE CONCAT('%', #{order_no}, '%')
+            </if>
+        </where>
+        ORDER BY so.create_time DESC
+    </select>
+    <select id="selectByAdmin" resultType="com.www.pojo.SysOrder">
+        SELECT
+        so.*, sh.*, u_owner.*, u_user.*
+        FROM
+        sys_order so
+        INNER JOIN sys_house sh ON so.house_id = sh.id
+        LEFT JOIN sys_user u_owner ON so.owner_id = u_owner.id
+        LEFT JOIN sys_user u_user ON so.user_id = u_user.id
+        <where>
+            <if test="order_no != null and order_no != ''">
+                AND order_no LIKE CONCAT('%', #{order_no}, '%')
+            </if>
+        </where>
+        ORDER BY so.create_time DESC
+    </select>
+    <select id="selectByBuyer" resultType="com.www.pojo.SysOrder">
+        SELECT
+        so.*, sh.*, u_owner.*, u_user.*
+        FROM
+        sys_order so
+        INNER JOIN sys_house sh ON so.house_id = sh.id
+        LEFT JOIN sys_user u_owner ON so.owner_id = u_owner.id
+        LEFT JOIN sys_user u_user ON so.user_id = u_user.id
+        <where>
+            <if test="order_no != null and order_no != ''">
+                AND so.order_no LIKE CONCAT('%', #{order_no}, '%')
+            </if>
+            <if test="status != null and status != ''">
+                AND so.status = #{status}
+            </if>
+            <if test="userId != null and userId != ''">
+                AND so.user_id = #{userId}
+            </if>
+        </where>
+        ORDER BY so.create_time DESC
+    </select>
+
+
+</mapper>

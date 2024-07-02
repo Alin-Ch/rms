@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.www.mapper.SysLogMapper">
+
+    <resultMap id="BaseResultMap" type="com.www.pojo.SysLog">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="operateName" column="operate_name" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="ip" column="ip" jdbcType="VARCHAR"/>
+        <result property="uri" column="uri" jdbcType="VARCHAR"/>
+        <result property="method" column="method" jdbcType="VARCHAR"/>
+        <result property="methodDescription" column="method_description" jdbcType="VARCHAR"/>
+        <result property="params" column="params" jdbcType="VARCHAR"/>
+        <result property="browser" column="browser" jdbcType="VARCHAR"/>
+        <result property="userId" column="user_id" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id
+        ,operate_name,name,
+        create_time,update_time,username,
+        ip,uri,method,
+        method_description,params,browser,
+        user_id
+    </sql>
+    <select id="getLogBie1" resultType="com.www.pojo.EchartsLine">
+        -- 这里的 DATE(time) 不能分隔开，DATE相当于一个函数，千万不能在这里格式化代码，不然就没数据了
+        SELECT DATE (create_time) AS date, COUNT (*) AS value
+        FROM sys_log
+        where `operate_name` LIKE '%登录%'
+        GROUP BY date
+        ORDER BY date DESC LIMIT 7;
+    </select>
+    <select id="getLogBie" resultType="com.www.pojo.EchartsLine">
+        -- xml需要用特定转义符来表示 小于号
+        SELECT DATE_SUB(CURDATE(), INTERVAL seq.seq DAY) AS date,
+        IFNULL(COUNT(sys_log.create_time), 0) AS value
+        FROM
+            (SELECT t0.i + t1.i * 10 + t2.i * 100 AS seq
+            FROM
+            (SELECT 0 AS i UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION
+            SELECT 7 UNION SELECT 8 UNION SELECT 9) AS t0,
+            (SELECT 0 AS i UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION
+            SELECT 7 UNION SELECT 8 UNION SELECT 9) AS t1,
+            (SELECT 0 AS i UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION
+            SELECT 7 UNION SELECT 8 UNION SELECT 9) AS t2
+            HAVING seq &lt; 7) AS seq
+            LEFT JOIN sys_log
+        ON DATE (sys_log.create_time) = DATE_SUB(CURDATE(), INTERVAL seq.seq DAY) AND
+            sys_log.operate_name LIKE '%登录%'
+        GROUP BY date
+        ORDER BY date DESC;
+    </select>
+    <select id="getLogBieData" resultType="com.www.pojo.SysLog">
+        -- xml需要用特定转义符来表示 小于号
+        SELECT DATE_SUB(CURDATE(), INTERVAL seq.seq DAY) AS date,
+        IFNULL(COUNT(sys_log.create_time), 0) AS value
+        FROM
+            (SELECT t0.i + t1.i * 10 + t2.i * 100 AS seq
+            FROM
+            (SELECT 0 AS i UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION
+            SELECT 7 UNION SELECT 8 UNION SELECT 9) AS t0,
+            (SELECT 0 AS i UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION
+            SELECT 7 UNION SELECT 8 UNION SELECT 9) AS t1,
+            (SELECT 0 AS i UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION
+            SELECT 7 UNION SELECT 8 UNION SELECT 9) AS t2
+            HAVING seq &lt; 7) AS seq
+            LEFT JOIN sys_log
+        ON DATE (sys_log.create_time) = DATE_SUB(CURDATE(), INTERVAL seq.seq DAY) AND
+            sys_log.operate_name LIKE '%登录%'
+        GROUP BY date
+        ORDER BY date DESC;
+    </select>
+
+
+</mapper>

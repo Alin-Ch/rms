@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.www.mapper.SysUserMapper">
+
+    <resultMap id="BaseResultMap" type="com.www.pojo.SysUser">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="city" column="city" jdbcType="VARCHAR"/>
+        <result property="created" column="created" jdbcType="TIMESTAMP"/>
+        <result property="updated" column="updated" jdbcType="TIMESTAMP"/>
+        <result property="lastLogin" column="last_login" jdbcType="TIMESTAMP"/>
+        <result property="statu" column="status" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id
+        ,username,password,
+        avatar,email,city,phone,
+        created,updated,last_login,
+        statu
+    </sql>
+
+    <select id="getNavMenuIds" resultType="java.lang.Long">
+        select distinct rm.menu_id
+        from sys_user_role ur
+                 left join sys_role_menu rm on ur.role_id = rm.role_id
+        where ur.user_id = #{userId}
+
+    </select>
+
+    <select id="listByMenuId" resultType="com.www.pojo.SysUser">
+        SELECT DISTINCT su.*
+        FROM sys_user_role ur
+                 LEFT JOIN sys_role_menu rm ON ur.role_id = rm.role_id
+                 LEFT JOIN sys_user su ON ur.user_id = su.id
+        WHERE rm.menu_id = #{menuId}
+    </select>
+
+    <select id="getUserList" resultType="com.www.pojo.SysUser">
+        SELECT u.*
+        FROM sys_user u
+                 JOIN sys_user_role r ON u.id = r.user_id
+        WHERE r.role_id = 1
+    </select>
+</mapper>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" name="google" content="notranslate" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=hGar2RPyxSrN09NEauVb2Km9qB7HGPow"></script>
+  <title>客户端</title>
+  <style>
+    ::-webkit-scrollbar {
+      display: none;
+    }
+
+    #nprogress .bar {
+      /* 自定义颜色 需要加上!important;，这里加了渐变色 */
+      background-color: #FFFFFF !important;
+      background-image: linear-gradient(0deg, #FFFFFF 0%, #6284FF 50%) !important;
+      height: 3px !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.www.mapper.SysHouseMapper">
+
+    <select id="findBySearch" resultType="com.www.pojo.SysHouse">
+        SELECT sys_house.* from sys_house
+        <where>
+            <if test="name != null and name != ''">
+                AND sh.name LIKE CONCAT('%', #{name}, '%')
+            </if>
+            <if test="username != null and username != ''">
+                AND su.username LIKE CONCAT('%', #{username}, '%')
+            </if>
+            <if test="ownername != null and ownername != ''">
+                AND su2.username LIKE CONCAT('%', #{ownername}, '%')
+            </if>
+        </where>
+    </select>
+    <select id="getPageData" resultType="com.www.pojo.SysHouse">
+        SELECT h.*,
+        ht.name AS typeName
+        FROM sys_house h
+        LEFT JOIN sys_house_type ht ON h.type_id = ht.id
+        <where>
+            <if test="name != null and name != ''">
+                AND h.name LIKE CONCAT('%', #{name}, '%')
+            </if>
+            <if test="owner_id != null and owner_id != ''">
+                AND h.owner_id = #{owner_id}
+            </if>
+        </where>
+        ORDER BY h.create_time DESC
+    </select>
+
+
+</mapper>

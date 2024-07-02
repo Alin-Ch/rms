@@ -1,0 +1,193 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  #panorama {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+  }
+  .pnlm-hotspot-base {
+    /* width: 60px; */
+  }
+  .pnlm-hotspot-base span {
+    color: red !important;
+  }
+  .pnlm-load-box {
+    display: none !important;
+  }
+  .test {
+    width: 80px;
+    height: 20px;
+    background-color: #2b577a;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .test-child {
+    position: absolute;
+    width: 100px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.5);
+    top: -50px;
+    left: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .point {
+    width: 80px;
+    height: 80px;
+    background: url("http://vrfiles.tangdaoyou.com/def_material/148297810882124i.png?v=2.0001");
+    /* background-color: #2b577a; */
+    background-size: 80px 2000px;
+    transform-origin: 50% 50%;
+    background-position: 0px 0px;
+    background-position-y: 0px;
+    /* z-index: 12; */
+    /* animation: loop 6s ease infinite; */
+  }
+  .point::after {
+    content: "守护营地";
+    position: absolute;
+    width: 100px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.5);
+    top: -20px;
+    color: white;
+    text-align: center;
+    line-height: 40px;
+    font-size: 14px;
+  }
+  .mask {
+    width: 400px;
+    height: 500px;
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+  }
+  .mask > div {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    bottom: -60px;
+    border-radius: 50%;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+  .map {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    right: 0;
+    top: 0;
+  }
+  .map-close {
+    position: absolute;
+    font-size: 16px;
+    right: 10px;
+    top: 10px;
+    display: none;
+  }
+  .map-one {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #fff;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .map-two {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #fff;
+    margin: 5px;
+    float: right;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .map-one-fov {
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border-radius: 50%;
+    position: relative;
+    transform: rotate(0deg);
+  }
+  .map-one-fov::after {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 10px;
+    top: -10px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background-color: salmon;
+  }
+  .map-two-fov {
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border-radius: 50%;
+    position: relative;
+    transform: rotate(0deg);
+    opacity: 0;
+  }
+  .map-two-fov::after {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 10px;
+    top: -10px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background-color: salmon;
+  }
+  .xiaochengxu {
+    /* height: 40px; */
+    background: #2b577a;
+    padding: 5px;
+    color: white;
+    font-size: 12px;
+    box-sizing: border-box;
+  }
+  .xiaochengxu::after {
+    content: "小程序123";
+  }
+  .mask-vr {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    padding: 10px;
+    font-size: 12px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    z-index: 10;
+  }
+  .mask-bk {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background-color: transparent;
+    left: 0;
+    top: 0;
+    display: none;
+  }
+  .pnlm-orientation-button {
+    display: none !important;
+  }
