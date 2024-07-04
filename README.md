@@ -1,10 +1,10 @@
 # 基于Web的房屋租赁系统/平台
 
-Spring Boot、Spring Security、MySQL、Maven、Vue 3 + JavaScript + Vite
+Spring Boot、Spring Security、MySQL、Redis、Maven、WebSocket、Vue 3 + JavaScript + Vite、ElementPlus、Echarts、BaiduMap、ThreeJS等
 
-权限认证、动态菜单、使用基于用户的协同过滤算法实现 用户-房东 双边推荐、百度地图选点、附近房屋功能、websocket在线咨询功能、支付宝沙箱支付、邮箱验证码、阿里云存储、threeJS全景看房、富文本并预防XSS、Echarts图表等
+主要实现功能有：权限认证、动态菜单、使用基于用户的协同过滤算法实现 用户-房东 双边推荐、百度地图选点、附近房屋功能、websocket在线咨询功能、支付宝沙箱支付、邮箱验证码、阿里云存储、threeJS全景看房、富文本并预防XSS、Echarts图表等
 
-
+亮点：租客-房东 双边推荐，试用协同过滤算法实现，可以修改为其它需求，例如 求职者-HR 之间的求职平台等。
 
 ## 后端启动
 
@@ -29,3 +29,38 @@ utf8mb4_general_ci替换为utf8_general_ci
 - npm i
 - npm run dev
 
+
+
+## 页面截图
+
+![1](images\1.png)
+
+![2](images\2.png)
+
+![3](images\3.png)
+
+![4](images\4.png)
+
+![5](images\5.png)
+
+![6](images\6.png)
+
+![7](images\7.png)
+
+![8](images\8.png)
+
+![9](images\9.png)
+
+![11](images\11.png)
+
+![12](images\12.png)
+
+![13](images\13.png)
+
+![14](images\14.png)
+
+![15](images\15.png)
+
+
+
+###### 如有问题，加群617545186咨询。

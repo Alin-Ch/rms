@@ -21,7 +21,7 @@ npm run build
 ```
 npm run preview
 ```
-    
+
 ### 代码格式检查
 
 ```
@@ -33,8 +33,10 @@ npm run lint
 ```
 npm run lint:fix
 ```
-        
+
 
 
 富文本编辑器可以用 md-editor-v3
 滚动插件 BetterScroll
+
+百度地图的key已经提供，但免费限额用完就没得用了
