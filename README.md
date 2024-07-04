@@ -33,33 +33,35 @@ utf8mb4_general_ci替换为utf8_general_ci
 
 ## 页面截图
 
-![1](images\1.png)
+<img src="images/1.png"  />
 
-![2](images\2.png)
+<img src="images/2.png"  />
 
-![3](images\3.png)
+<img src="images/3.png"  />
 
-![4](images\4.png)
+<img src="images/4.png"  />
 
-![5](images\5.png)
+<img src="images/5.png"  />
 
-![6](images\6.png)
+<img src="images/6.png"  />
 
-![7](images\7.png)
+<img src="images/7.png"  />
 
-![8](images\8.png)
+<img src="images/8.png"  />
 
-![9](images\9.png)
+<img src="images/9.png"  />
 
-![11](images\11.png)
+<img src="images/11.png"  />
 
-![12](images\12.png)
+<img src="images/12.png"  />
 
-![13](images\13.png)
+<img src="images/13.png"  />
 
-![14](images\14.png)
+<img src="images/14.png"  />
 
-![15](images\15.png)
+<img src="images/15.png"  />
+
+
 
 
 
